@@ -1,6 +1,6 @@
-# 🧠 Handwritten Digit Recognition (kNN) - Final Code
 
-
+# Title
+st.title("🧠 Handwritten Digit Recognition (kNN)")
 import streamlit as st
 import numpy as np
 import cv2
@@ -12,12 +12,19 @@ st.title("🧠 Handwritten Digit Recognition (kNN)")
 # Load and train model
 @st.cache_resource
 def load_model():
-    # Check if file exists
-    if not os.path.exists("digits1.png"):
-        st.error("❌ digits1.png file not found!")
+    # 1. Get the directory where this app.py file is located
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    
+    # 2. Join that directory with the image filename
+    image_path = os.path.join(BASE_DIR, 'digits1.png')
+
+    # 3. Check if file exists using the full path
+    if not os.path.exists(image_path):
+        st.error(f"❌ {image_path} file not found!")
         return None
 
-    image = cv2.imread('digits1.png')
+    # 4. Read the image using the full path
+    image = cv2.imread(image_path)
 
     if image is None:
         st.error("❌ Failed to load image!")
@@ -42,6 +49,41 @@ def load_model():
     knn.train(train, cv2.ml.ROW_SAMPLE, train_labels)
 
     return knn
+
+# ... (Keep the rest of your code from "# Load model" downwards exactly the same) ...
+# Load and train model
+# @st.cache_resource
+# def load_model():
+#     # Check if file exists
+#     if not os.path.exists("digits1.png"):
+#         st.error("❌ digits1.png file not found!")
+#         return None
+
+#     image = cv2.imread('digits1.png')
+
+#     if image is None:
+#         st.error("❌ Failed to load image!")
+#         return None
+
+#     # Convert to grayscale
+#     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+#     # Split into cells
+#     cells = [np.hsplit(row, 100) for row in np.vsplit(gray, 50)]
+#     x = np.array(cells)
+
+#     # Train data
+#     train = x[:, :50].reshape(-1, 400).astype(np.float32)
+
+#     # Labels
+#     k = np.arange(10)
+#     train_labels = np.repeat(k, 250)[:, np.newaxis]
+
+#     # Train KNN
+#     knn = cv2.ml.KNearest_create()
+#     knn.train(train, cv2.ml.ROW_SAMPLE, train_labels)
+
+#     return knn
 
 
 # Load model
