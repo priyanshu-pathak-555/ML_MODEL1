@@ -78,4 +78,4 @@ if uploaded_file is not None:
     # Display
     st.image(resized, caption="Processed Image", width=150)
     st.success(f"✅ Predicted Digit: {int(result[0][0])}")
-```
+
