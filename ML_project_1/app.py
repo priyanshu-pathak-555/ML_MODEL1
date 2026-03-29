@@ -1,6 +1,6 @@
 # 🧠 Handwritten Digit Recognition (kNN) - Final Code
 
-```python
+
 import streamlit as st
 import numpy as np
 import cv2
