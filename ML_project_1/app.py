@@ -1,6 +1,5 @@
 
 # Title
-st.title("🧠 Handwritten Digit Recognition (kNN)")
 import streamlit as st
 import numpy as np
 import cv2
